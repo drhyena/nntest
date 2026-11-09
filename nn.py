@@ -16,11 +16,7 @@ class NeuralNetwork:
 
     def create_layer(self,no_of_neurons,no_of_weight):
         weights = self.generate_random_weight(no_of_neurons,no_of_weight)
-        layer = []
-        for i in range(no_of_neurons):
-            n = weights[:,i]
-            layer.append(n)
-        self.layers.append(layer)
+        self.layers.append(weights)
 
 
     def generate_random_weight(self,no_of_neurons,no_of_weights):
@@ -51,6 +47,9 @@ class NeuralNetwork:
         output = self.layers[0]
         for x in self.layers[1:]:
             x = np.array(x)
+            np.flip(output)
+            print("output shape,", output.shape)
+            print("x shaoe,",x.shape)
             output = output.dot(x)
             output = self.sigmoid(output)
         return output 
@@ -90,5 +89,5 @@ network.layers.append(x[0])
 network.create_layer(5,30)
 network.create_layer(3,5)  
 
-network.feedforward()
+print(network.feedforward())
 
